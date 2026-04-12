@@ -35,12 +35,14 @@
   --font-heading: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
 
-  --max-width: 1200px;
+  --max-width: 1500px;
   --section-padding: 100px 0;
 }
 
 /* ===== RESET & BASE ===== */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -70,7 +72,8 @@ a {
   color: inherit;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -81,12 +84,19 @@ button {
   background: none;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   font-family: var(--font-body);
 }
 
 /* ===== TYPOGRAPHY ===== */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   font-weight: 600;
   line-height: 1.15;
@@ -98,7 +108,13 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0px;
+}
+
+@media (max-width: 1550px) {
+  .container {
+    padding: 0px 15px;
+  }
 }
 
 .section {
@@ -159,7 +175,7 @@ h1, h2, h3, h4, h5, h6 {
   gap: 8px;
   padding: 14px 32px;
   background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-  color: #0a0a0a;
+  color: white;
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -174,7 +190,7 @@ h1, h2, h3, h4, h5, h6 {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   opacity: 0;
   transition: var(--transition);
 }
@@ -221,9 +237,11 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg-primary);
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--gold-dark);
   border-radius: 3px;
@@ -231,23 +249,47 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ===== ANIMATIONS ===== */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position:  200% center; }
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .animate-fade-up {
@@ -259,6 +301,7 @@ h1, h2, h3, h4, h5, h6 {
   :root {
     --section-padding: 70px 0;
   }
+
   .container {
     padding: 0 18px;
   }

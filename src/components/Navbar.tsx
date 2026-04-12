@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logoImg from '../assets/imgs/logo.png';
+import logoImg from '../assets/imgs/white-logo.webp';
 import '../styles/Navbar.css';
 
 export default function Navbar() {
@@ -18,6 +18,12 @@ export default function Navbar() {
     setMenuOpen(false);
   }, [pathname]);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
   const isActive = (path: string) => pathname === path;
 
   return (
@@ -25,24 +31,20 @@ export default function Navbar() {
       <nav className={`navbar${scrolled ? ' navbar--scrolled' : ''}`}>
         <div className="navbar__inner">
           <Link to="/" className="navbar__logo">
-            <div className="navbar__logo-img-wrap">
-              <img src={logoImg} alt="Silk & Shine Club" width={36} height={36} />
-            </div>
-            <div className="navbar__logo-text">
-              <div className="navbar__logo-mark">Silk <span>&</span> Shine</div>
-              <div className="navbar__logo-sub">Club · Everlast Wellness</div>
-            </div>
+            <img src={logoImg} alt="" className="navbar__logo-img" />
           </Link>
 
-          <div className="navbar__links">
-            <Link to="/" className={`navbar__link${isActive('/') ? ' navbar__link--active' : ''}`}>Home</Link>
-            <Link to="/about" className={`navbar__link${isActive('/about') ? ' navbar__link--active' : ''}`}>About</Link>
-            <Link to="/contact" className={`navbar__link${isActive('/contact') ? ' navbar__link--active' : ''}`}>Contact</Link>
-          </div>
+          <div className="navbar__menu">
+            <div className="navbar__links">
+              <Link to="/" className={`navbar__link${isActive('/') ? ' navbar__link--active' : ''}`}>Home</Link>
+              <Link to="/about" className={`navbar__link${isActive('/about') ? ' navbar__link--active' : ''}`}>About</Link>
+              <Link to="/contact" className={`navbar__link${isActive('/contact') ? ' navbar__link--active' : ''}`}>Contact</Link>
+            </div>
 
-          <div className="navbar__gender-links">
-            <Link to="/for-women" className={`navbar__gender-link${isActive('/for-women') ? ' navbar__gender-link--active' : ''}`}>For Women</Link>
-            <Link to="/for-men" className={`navbar__gender-link${isActive('/for-men') ? ' navbar__gender-link--active' : ''}`}>For Men</Link>
+            <div className="navbar__gender-links">
+              <Link to="/for-women" className={`navbar__gender-link${isActive('/for-women') ? ' navbar__gender-link--active' : ''}`}>For Women</Link>
+              <Link to="/for-men" className={`navbar__gender-link${isActive('/for-men') ? ' navbar__gender-link--active' : ''}`}>For Men</Link>
+            </div>
           </div>
 
           <div className="navbar__cta">

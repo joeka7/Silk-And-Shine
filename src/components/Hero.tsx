@@ -1,17 +1,16 @@
 import { Link } from 'react-router-dom';
-import coupleImg from '../assets/imgs/woman-men-3.webp';
+import bannerImg from '../assets/imgs/banner.webp';
 import '../styles/Hero.css';
 
 export default function Hero() {
   return (
     <section className="hero" aria-label="Hero">
-      <div className="hero__bg-image" style={{ backgroundImage: `url(${coupleImg})` }}></div>
+      <div className="hero__bg-image" style={{ backgroundImage: `url(${bannerImg})` }}></div>
       <div className="hero__bg-overlay"></div>
 
       <div className="container">
         <div className="hero__content">
           <div className="hero__badge glass-panel">
-            <span className="hero__badge-dot" />
             <span className="hero__badge-text">Exclusive Annual Membership</span>
           </div>
 
@@ -31,7 +30,7 @@ export default function Hero() {
             <Link to="/for-women" className="btn-primary hero-btn">
               For Women
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
             <Link to="/for-men" className="btn-outline hero-btn outline-light">For Men</Link>
@@ -49,7 +48,7 @@ export default function Hero() {
             </div>
             <div className="hero__stat-divider" />
             <div className="hero__stat">
-              <div className="hero__stat-value">1yr</div>
+              <div className="hero__stat-value">1 yr</div>
               <div className="hero__stat-label">Full Membership</div>
             </div>
           </div>
