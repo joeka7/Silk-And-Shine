@@ -284,6 +284,29 @@
   border-top: 1px solid var(--gold-border);
 }
 
+/* Close button inside mobile panel */
+.navbar__mobile-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  width: 36px;
+  height: 36px;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.navbar__mobile-close:hover {
+  background: var(--gold-alpha);
+  color: var(--gold);
+}
+
 /* ============================================================
    RESPONSIVE
    ============================================================ */
@@ -328,7 +351,29 @@
 /* — Mobile (≤ 600 px) ————————————————————————————————————— */
 @media (max-width: 600px) {
   .navbar {
+    position: relative;
     padding: 8px 16px;
+    background: rgba(6, 14, 11, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--gold-border);
+  }
+
+  .navbar:not(.navbar--scrolled) {
+    background: rgba(6, 14, 11, 0.75);
+    z-index: 99999;
+  }
+
+  /* Keep hamburger as 3 lines on mobile — close is handled inside the panel */
+  .navbar__toggle.open span:nth-child(1) {
+    transform: none;
+  }
+  .navbar__toggle.open span:nth-child(2) {
+    opacity: 1;
+    transform: none;
+  }
+  .navbar__toggle.open span:nth-child(3) {
+    transform: none;
   }
 
   .navbar__inner {
@@ -336,7 +381,7 @@
   }
 
   .navbar--scrolled .navbar__inner {
-    height: 58px;
+    height: 68px;
   }
 
   .navbar__logo-img {
@@ -344,13 +389,24 @@
   }
 
   .navbar--scrolled .navbar__logo-img {
-    height: 50px;
+    height: 56px;
+  }
+
+  /* Hide header when menu is open on mobile — keep in flow to prevent layout shift */
+  .navbar--menu-open {
+    visibility: hidden;
+    opacity: 0;
   }
 
   .navbar__mobile {
-    width: 70vw;
-    padding-top: 80px;
-    padding-left: 20px;
-    padding-right: 20px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    padding-top: 20px;
+    padding-left: 24px;
+    padding-right: 24px;
+    border-left: none;
+    border-top: none;
   }
 }

@@ -28,7 +28,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`navbar${scrolled ? ' navbar--scrolled' : ''}`}>
+      <nav className={`navbar${scrolled ? ' navbar--scrolled' : ''}${menuOpen ? ' navbar--menu-open' : ''}`}>
         <div className="navbar__inner">
           <Link to="/" className="navbar__logo">
             <img src={logoImg} alt="" className="navbar__logo-img" />
@@ -64,6 +64,13 @@ export default function Navbar() {
       </nav>
 
       <div className={`navbar__mobile${menuOpen ? ' open' : ''}`}>
+        <button
+          className="navbar__mobile-close"
+          onClick={() => setMenuOpen(false)}
+          aria-label="Close menu"
+        >
+          <i className="fa-solid fa-xmark"></i>
+        </button>
         <Link to="/" className={`navbar__mobile-link${isActive('/') ? ' navbar__mobile-link--active' : ''}`}>Home</Link>
         <Link to="/for-women" className={`navbar__mobile-link${isActive('/for-women') ? ' navbar__mobile-link--active' : ''}`}>For Women</Link>
         <Link to="/for-men" className={`navbar__mobile-link${isActive('/for-men') ? ' navbar__mobile-link--active' : ''}`}>For Men</Link>

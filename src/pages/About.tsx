@@ -1,9 +1,16 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import buildingImg from '../assets/imgs/EWMC-New-Building.webp';
+import clubImg from '../assets/imgs/club.webp';
 import appMockup   from '../assets/imgs/responsive_device-i-phone14.webp';
-import Newsletter from '../components/Newsletter';
 import '../styles/pages.css';
+
+const stats = [
+  { value: '10+', label: 'Years of Clinical Excellence' },
+  { value: '∞',   label: 'Unlimited Visits' },
+  { value: '2',   label: 'Tailored Programmes' },
+  { value: '100%', label: 'Personalised Care' },
+];
 
 export default function About() {
   useEffect(() => {
@@ -30,70 +37,68 @@ export default function About() {
         </div>
       </section>
 
-      {/* Story */}
-      <section className="about-story section">
+      {/* Building Image Banner */}
+      <section className="about-banner">
         <div className="container">
-          <div className="about-story__grid">
-            <div className="about-story__visual">
-              <div className="about-story__building-wrap glass-panel">
-                <img
-                  src={buildingImg}
-                  alt="Everlast Wellness Medical Center"
-                  className="about-story__building-img"
-                  loading="lazy"
-                />
-                <div className="about-story__building-overlay">
-                  <div className="about-story__visual-title">10+</div>
-                  <div className="about-story__visual-subtitle">Years of Clinical Excellence</div>
-                </div>
-              </div>
+          <div className="about-banner__wrap">
+            <img
+              src={buildingImg}
+              alt="Everlast Wellness Medical Center"
+              className="about-banner__img"
+              loading="lazy"
+            />
+            <div className="about-banner__overlay" />
+          </div>
+        </div>
+      </section>
 
-              <div className="about-story__stat-grid">
-                <div className="about-story__stat glass-panel">
-                  <div className="about-story__stat-value">∞</div>
-                  <div className="about-story__stat-label">Unlimited Visits</div>
-                </div>
-                <div className="about-story__stat glass-panel">
-                  <div className="about-story__stat-value">2</div>
-                  <div className="about-story__stat-label">Programmes</div>
-                </div>
-                <div className="about-story__stat glass-panel">
-                  <div className="about-story__stat-value">UAE</div>
-                  <div className="about-story__stat-label">Based Clinic</div>
-                </div>
-                <div className="about-story__stat glass-panel">
-                  <div className="about-story__stat-value">100%</div>
-                  <div className="about-story__stat-label">Personalised</div>
-                </div>
+      {/* Stats Row */}
+      <section className="about-stats section">
+        <div className="container">
+          <div className="about-stats__grid">
+            {stats.map((s) => (
+              <div className="about-stats__item glass-panel" key={s.label}>
+                <div className="about-stats__value">{s.value}</div>
+                <div className="about-stats__label">{s.label}</div>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <div className="about-story__text">
-              <div className="section-label">The Club</div>
-              <h2 className="section-title">A Transformative Journey<br />in Hair Care</h2>
-              <div className="about-story__prose">
-                <p>
-                  The Silk &amp; Shine Club is an exclusive annual membership that offers a transformative
-                  journey in hair care. Designed by the experts at Everlast Wellness,
-                  this club is perfect for those who want the best for their hair health and vitality.
-                </p>
-                <p>
-                  Members gain unlimited access to cutting-edge treatments and protocols tailored
-                  for both men and women. Each treatment is part of a strategic regimen designed
-                  for maximum and lasting effectiveness.
-                </p>
-                <p>
-                  Everlast Wellness is an aesthetic wellness clinic specialising in dermatological
-                  and anti-aging treatments and procedures. Our mission is to enhance the health
-                  and wellness of our local community, supporting the body, mind, and spirit.
-                </p>
-              </div>
-              <div className="about-story__actions">
-                <Link to="/contact" className="btn-primary">Join the Club</Link>
-                <Link to="/for-women" className="btn-outline">For Women</Link>
-                <Link to="/for-men" className="btn-outline">For Men</Link>
-              </div>
+      {/* Story Text */}
+      <section className="about-story section">
+        <div className="container about-story__container glass-panel">
+          {/* Top — Text */}
+          <div className="about-story__text">
+            <div className="section-label">The Club</div>
+            <h2 className="section-title">A Transformative Journey<br />in Hair Care</h2>
+            <div className="about-story__prose">
+              <p>
+                The Silk &amp; Shine Club is an exclusive annual membership that offers a transformative
+                journey in hair care. Designed by the experts at Everlast Wellness,
+                this club is perfect for those who want the best for their hair health and vitality.
+              </p>
+              <p>
+                Members gain unlimited access to cutting-edge treatments and protocols tailored
+                for both men and women. Each treatment is part of a strategic regimen designed
+                for maximum and lasting effectiveness.
+              </p>
+              <p>
+                Everlast Wellness is an aesthetic wellness clinic specialising in dermatological
+                and anti-aging treatments and procedures. Our mission is to enhance the health
+                and wellness of our local community, supporting the body, mind, and spirit.
+              </p>
             </div>
+            <div className="about-story__actions">
+              <Link to="/contact" className="btn-primary">Join the Club</Link>
+              <Link to="/for-women" className="btn-outline">For Women</Link>
+              <Link to="/for-men" className="btn-outline">For Men</Link>
+            </div>
+          </div>
+          {/* Bottom — Image */}
+          <div className="about-story__image-wrap">
+            <img src={clubImg} alt="Silk & Shine Club" className="about-story__image" loading="lazy" />
           </div>
         </div>
       </section>
@@ -106,12 +111,12 @@ export default function About() {
               <div className="section-label">Mobile Experience</div>
               <h3 className="about-app__title">Everlast Wellness App</h3>
               <p className="about-app__desc">
-                Enhance your Silk & Shine Club experience. Book appointments seamlessly,
+                Enhance your Silk &amp; Shine Club experience. Book appointments seamlessly,
                 track your progress securely, and access exclusive VIP offers directly from your phone.
               </p>
               <div className="about-app__actions">
-                <a href="#" className="btn-primary">App Store</a>
-                <a href="#" className="btn-outline">Google Play</a>
+                <a href="https://apps.apple.com/eg/app/everlast-wellness/id6737142880" className="btn-primary" target="_blank" rel="noopener noreferrer">App Store</a>
+                <a href="https://play.google.com/store/apps/details?id=com.everlast.wellness&hl=en&pli=1" className="btn-outline" target="_blank" rel="noopener noreferrer">Google Play</a>
               </div>
             </div>
             <div className="about-app__mockup-wrapper">
@@ -126,7 +131,6 @@ export default function About() {
         </div>
       </section>
 
-      <Newsletter />
     </main>
   );
 }

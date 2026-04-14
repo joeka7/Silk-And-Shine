@@ -30,7 +30,13 @@ const countryCodes = [
   { code: '+962', label: '(+962) Jordan' },
 ];
 
-const socials = ['Snapchat', 'TikTok', 'Instagram', 'YouTube', 'Facebook', 'LinkedIn'];
+const socials = [
+  { name: 'Snapchat',  icon: 'fa-brands fa-snapchat',    href: 'https://www.snapchat.com/add/everlastwmc' },
+  { name: 'TikTok',   icon: 'fa-brands fa-tiktok',       href: 'https://www.tiktok.com/@everlastwellness' },
+  { name: 'Instagram',icon: 'fa-brands fa-instagram',    href: 'https://www.instagram.com/everlastwellness/' },
+  { name: 'YouTube',  icon: 'fa-brands fa-youtube',      href: 'https://www.youtube.com/channel/UC8BxCEjG34knpcKLoFLNUgg' },
+  { name: 'LinkedIn', icon: 'fa-brands fa-linkedin-in',  href: 'https://www.linkedin.com/company/everlastwellnessmc/' },
+];
 
 function validate(data: FormData): FormErrors {
   const errors: FormErrors = {};
@@ -128,7 +134,7 @@ export default function Contact() {
 
               <div className="contact-info__items">
                 <div className="contact-info__item">
-                  <div className="contact-info__item-icon">📞</div>
+                  <div className="contact-info__item-icon"><i className="fa-solid fa-phone"></i></div>
                   <div>
                     <div className="contact-info__item-label">Phone</div>
                     <div className="contact-info__item-value">
@@ -137,7 +143,7 @@ export default function Contact() {
                   </div>
                 </div>
                 <div className="contact-info__item">
-                  <div className="contact-info__item-icon">📧</div>
+                  <div className="contact-info__item-icon"><i className="fa-solid fa-envelope"></i></div>
                   <div>
                     <div className="contact-info__item-label">Email</div>
                     <div className="contact-info__item-value">
@@ -148,7 +154,7 @@ export default function Contact() {
                   </div>
                 </div>
                 <div className="contact-info__item">
-                  <div className="contact-info__item-icon">📍</div>
+                  <div className="contact-info__item-icon"><i className="fa-solid fa-location-dot"></i></div>
                   <div>
                     <div className="contact-info__item-label">Address</div>
                     <div className="contact-info__item-value">
@@ -158,7 +164,7 @@ export default function Contact() {
                   </div>
                 </div>
                 <div className="contact-info__item">
-                  <div className="contact-info__item-icon">🕐</div>
+                  <div className="contact-info__item-icon"><i className="fa-solid fa-clock"></i></div>
                   <div>
                     <div className="contact-info__item-label">Working Hours</div>
                     <div className="contact-info__item-value">
@@ -172,7 +178,9 @@ export default function Contact() {
               <div className="contact-info__social-title">Follow Us</div>
               <div className="contact-info__social">
                 {socials.map((s) => (
-                  <a href="#" key={s} className="contact-info__social-link">{s}</a>
+                  <a href={s.href} key={s.name} className="contact-info__social-link" aria-label={s.name} target="_blank" rel="noopener noreferrer">
+                    <i className={s.icon}></i>
+                  </a>
                 ))}
               </div>
             </div>
@@ -261,12 +269,12 @@ export default function Contact() {
                 {/* Status messages */}
                 {status === 'success' && (
                   <div className="form-success">
-                    ✓ Message sent! We'll be in touch with you shortly.
+                    <i className="fa-solid fa-check"></i> Message sent! We'll be in touch with you shortly.
                   </div>
                 )}
                 {status === 'error' && (
                   <div className="form-error-msg">
-                    ✕ Something went wrong. Please try again or email us directly.
+                    <i className="fa-solid fa-xmark"></i> Something went wrong. Please try again or email us directly.
                   </div>
                 )}
 

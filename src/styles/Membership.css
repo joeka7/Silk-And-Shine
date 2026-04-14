@@ -60,6 +60,11 @@
   border-radius: var(--radius-lg);
   transition: all 0.4s ease;
 }
+@media (max-width: 767px) {
+  .benefit-item {
+    padding: 30px 0;
+  }
+}
 
 .benefit-item:hover {
   transform: translateY(-4px);
@@ -137,9 +142,21 @@
   border-radius: 40px;
 }
 
+@media (max-width: 767px) {
+  .pricing-card__badge {
+    font-size: 10px;
+  }
+}
+
 .pricing-card__header {
   border-bottom: 1px solid var(--border-light);
   padding-bottom: 24px;
+}
+
+@media (max-width: 767px) {
+  .pricing-card__header {
+    padding-bottom: 0;
+  }
 }
 
 .pricing-card__title {
@@ -209,7 +226,7 @@
 
 @media (max-width: 768px) {
   .pricing-card {
-    padding: 32px;
+    padding: 50px;
   }
   .vip-card-img {
     max-width: 100%;

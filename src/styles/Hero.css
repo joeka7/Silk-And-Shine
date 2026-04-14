@@ -238,16 +238,20 @@
   }
 }
 
+@media (max-width: 600px) {
+  .hero {
+    min-height: calc(100vh - 68px);
+    margin-top: -77px;
+    padding-top: 178px;
+  }
+
+  .hero__content {
+    padding-top: 0;
+    padding-bottom: 40px;
+  }
+}
+
 @media (max-width: 480px) {
-  .hero__actions {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .hero-btn {
-    width: 100%;
-  }
-
   .hero__stats {
     gap: 16px;
     padding: 20px;

@@ -6,7 +6,6 @@ import '../styles/Services.css';
 const services = [
   {
     tag: 'For Women',
-    icon: '✨',
     title: 'Women\'s Hair Programme',
     desc: 'Our treatments address the unique structural and hormonal hair needs of women, optimising for hair thickness, volume, and texture enhancement. Whether dealing with stress-induced thinning, hormonal changes, or environmental damage — we have a solution for you.',
     link: '/for-women',
@@ -15,7 +14,6 @@ const services = [
   },
   {
     tag: 'For Men',
-    icon: '⚡',
     title: 'Men\'s Hair Programme',
     desc: 'Treatments designed specifically for men\'s hair, addressing concerns like thinning, receding hairlines, and maintaining a strong, healthy look. We use advanced techniques and premium products to optimise your hair\'s performance.',
     link: '/for-men',
@@ -42,22 +40,21 @@ export default function Services() {
         </div>
         <div className="services__grid">
           {services.map((s) => (
-            <div className="service-card glass-panel" key={s.tag}>
+            <Link to={s.link} className="service-card glass-panel" key={s.tag} style={{ textDecoration: 'none', color: 'inherit' }}>
               <div className="service-card__image">
                 <img src={s.img} alt={s.imgAlt} loading="lazy" />
                 <div className="service-card__image-overlay" />
                 <div className="service-card__tag glass-panel">{s.tag}</div>
               </div>
               <div className="service-card__body">
-                <div className="service-card__icon-wrap">{s.icon}</div>
                 <h3 className="service-card__title">{s.title}</h3>
                 <p className="service-card__desc">{s.desc}</p>
-                <Link to={s.link} className="service-card__link">
+                <div className="service-card__link">
                   View Programme
-                  <span className="service-card__link-arrow">→</span>
-                </Link>
+                  <span className="service-card__link-arrow"><i className="fa-solid fa-arrow-right"></i></span>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

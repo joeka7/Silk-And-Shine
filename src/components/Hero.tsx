@@ -27,13 +27,11 @@ export default function Hero() {
           </p>
 
           <div className="hero__actions">
-            <Link to="/for-women" className="btn-primary hero-btn">
-              For Women
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+            <Link to="/contact" className="btn-primary hero-btn">
+              Contact Us
+              <i className="fa-solid fa-arrow-right" style={{ fontSize: '0.9em' }}></i>
             </Link>
-            <Link to="/for-men" className="btn-outline hero-btn outline-light">For Men</Link>
+            <Link to="/about" className="btn-outline hero-btn outline-light">About Club</Link>
           </div>
 
           <div className="hero__stats glass-panel">

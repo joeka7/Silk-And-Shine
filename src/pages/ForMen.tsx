@@ -1,21 +1,20 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Newsletter from '../components/Newsletter';
 import '../styles/pages.css';
 
 const membershipDetails = [
   {
-    icon: '🔬',
+    icon: 'fa-solid fa-microscope',
     title: 'Access to Latest Hair Care Technologies',
     desc: 'Revitalise your hair with advanced laser, PRP, and bioregenerative therapies. Boost hair growth and density with cutting-edge clinical protocols.',
   },
   {
-    icon: '📊',
+    icon: 'fa-solid fa-chart-bar',
     title: 'Ongoing Consultations & Progress Tracking',
     desc: 'Regular consultations and assessments track your progress, align efforts with your goals, and identify improvement areas for effective outcomes.',
   },
   {
-    icon: '🗓️',
+    icon: 'fa-solid fa-calendar-days',
     title: 'Priority Scheduling for Appointments',
     desc: 'Priority scheduling streamlines your access to appointments, reducing wait times and optimising resource allocation for your convenience.',
   },
@@ -23,37 +22,37 @@ const membershipDetails = [
 
 const benefits = [
   {
-    icon: '♾️',
+    icon: 'fa-solid fa-infinity',
     title: 'Unlimited Access to Advanced Treatments',
     desc: 'Unlimited access to the latest in hair restoration technologies, allowing consistent care for optimal results. Treatments are customised for individual needs, ensuring targeted support for every hair type and condition.',
   },
   {
-    icon: '💡',
+    icon: 'fa-solid fa-lightbulb',
     title: 'Exclusive, Cutting-Edge Technology',
     desc: 'Our protocols integrate state-of-the-art equipment like laser therapies, PRP infusions, and bioregenerative scalp treatments. Special focus is given to growth-stimulating and follicle-strengthening technologies.',
   },
   {
-    icon: '🧘',
+    icon: 'fa-solid fa-spa',
     title: 'Professional Care for Stress-Related Hair Issues',
     desc: 'Our therapies target stress impacts with scalp tension release and deep tissue nourishment. Gentle scalp massages and stress-relief treatments reduce inflammation, improve circulation, and promote stronger, resilient hair.',
   },
   {
-    icon: '⚗️',
+    icon: 'fa-solid fa-flask',
     title: 'Hormonal Balance Support',
     desc: 'We offer targeted therapies for hormonal imbalances caused by aging, medical treatments, or lifestyle. Treatments include hormone-supportive scalp serums and nutrient infusions to combat DHT and hormone-related hair issues.',
   },
   {
-    icon: '🤝',
+    icon: 'fa-solid fa-handshake',
     title: 'Gender-Neutral Care and Inclusivity',
     desc: 'The Club offers treatments for both men and women, tailoring hair care to gender-specific needs. Our treatments address the unique structural and hormonal hair needs optimising for thickness, volume, and texture enhancement.',
   },
   {
-    icon: '💎',
+    icon: 'fa-solid fa-gem',
     title: 'Value and Quality Assurance',
     desc: 'This membership offers exceptional value, granting access to premium hair care and technology at a fraction of individual session costs. Backed by Everlast Wellness, the Silk & Shine Club ensures top-quality care and clinical excellence.',
   },
   {
-    icon: '✦',
+    icon: 'fa-solid fa-star',
     title: 'Ultimate Hair Care Experience',
     desc: 'The Silk & Shine Club is more than a membership; it is a dedicated support system for hair and scalp health, providing members with the assurance of consistent, high-quality care.',
   },
@@ -102,7 +101,7 @@ export default function ForMen() {
             <div className="membership-detail__points">
               {membershipDetails.map((m) => (
                 <div className="membership-detail__point" key={m.title}>
-                  <div className="membership-detail__point-icon-wrap">{m.icon}</div>
+                  <div className="membership-detail__point-icon-wrap"><i className={m.icon}></i></div>
                   <div>
                     <div className="membership-detail__point-title">{m.title}</div>
                     <div className="membership-detail__point-desc">{m.desc}</div>
@@ -121,7 +120,7 @@ export default function ForMen() {
           <div className="benefits-grid__grid">
             {benefits.map((b) => (
               <div className="benefit-full-card" key={b.title}>
-                <div className="benefit-full-card__icon">{b.icon}</div>
+                <div className="benefit-full-card__icon"><i className={b.icon}></i></div>
                 <h3 className="benefit-full-card__title">{b.title}</h3>
                 <p className="benefit-full-card__desc">{b.desc}</p>
               </div>
@@ -146,7 +145,7 @@ export default function ForMen() {
                 <span className="pricing-section__amount">3,500</span>
                 <span className="pricing-section__period">/ year</span>
               </div>
-              <p className="pricing-section__gift">🎁 + Special Gift included on membership</p>
+              <p className="pricing-section__gift"><i className="fa-solid fa-gift"></i> + Special Gift included on membership</p>
               <Link to="/contact" className="btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
                 Get Your Membership Today →
               </Link>
@@ -155,7 +154,6 @@ export default function ForMen() {
         </div>
       </section>
 
-      <Newsletter />
     </main>
   );
 }

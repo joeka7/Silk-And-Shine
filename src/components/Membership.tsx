@@ -3,12 +3,12 @@ import clubCardImg from '../assets/imgs/aljameela-club-card.webp';
 import '../styles/Membership.css';
 
 const benefits = [
-  { icon: '♾️', title: 'Unlimited Access', desc: 'Unlimited visits and treatments based on your personalised hair care needs.' },
-  { icon: '🔬', title: 'Cutting-Edge Technology', desc: 'Laser therapies, PRP infusions, and bioregenerative scalp treatments.' },
-  { icon: '🧘', title: 'Stress-Related Care', desc: 'Scalp tension release, deep tissue nourishment, and stress-relief treatments.' },
-  { icon: '⚗️', title: 'Hormonal Balance', desc: 'Targeted therapies including hormone-supportive scalp serums.' },
-  { icon: '📊', title: 'Progress Tracking', desc: 'Regular consultations track your progress and keep treatment aligned.' },
-  { icon: '🗓️', title: 'Priority Scheduling', desc: 'Streamlined access to appointments with reduced wait times.' },
+  { icon: 'fa-solid fa-infinity', title: 'Unlimited Access', desc: 'Unlimited visits and treatments based on your personalised hair care needs.' },
+  { icon: 'fa-solid fa-microscope', title: 'Cutting-Edge Technology', desc: 'Laser therapies, PRP infusions, and bioregenerative scalp treatments.' },
+  { icon: 'fa-solid fa-spa', title: 'Stress-Related Care', desc: 'Scalp tension release, deep tissue nourishment, and stress-relief treatments.' },
+  { icon: 'fa-solid fa-flask', title: 'Hormonal Balance', desc: 'Targeted therapies including hormone-supportive scalp serums.' },
+  { icon: 'fa-solid fa-chart-bar', title: 'Progress Tracking', desc: 'Regular consultations track your progress and keep treatment aligned.' },
+  { icon: 'fa-solid fa-calendar-days', title: 'Priority Scheduling', desc: 'Streamlined access to appointments with reduced wait times.' },
 ];
 
 const plans = [
@@ -52,7 +52,7 @@ export default function Membership() {
         <div className="membership__benefits">
           {benefits.map((b) => (
             <div className="benefit-item glass-panel" key={b.title}>
-              <span className="benefit-item__icon">{b.icon}</span>
+              <span className="benefit-item__icon"><i className={b.icon}></i></span>
               <div>
                  <h4 className="benefit-item__title">{b.title}</h4>
                  <p className="benefit-item__desc">{b.desc}</p>
@@ -76,7 +76,7 @@ export default function Membership() {
               <div className="pricing-card__features">
                 {p.features.map((f) => (
                   <div className="pricing-card__feature" key={f}>
-                    <span className="pricing-card__feature-check">✓</span>
+                    <span className="pricing-card__feature-check"><i className="fa-solid fa-check"></i></span>
                     {f}
                   </div>
                 ))}

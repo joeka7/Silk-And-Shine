@@ -1,5 +1,5 @@
 import '../styles/Features.css';
-import clubImg from '../assets/imgs/join-aljameela-club.webp';
+import clubImg from '../assets/imgs/our-approach.webp';
 
 const features = [
   {
@@ -45,7 +45,7 @@ export default function Features() {
           </div>
           <div className="features__visual">
             <div className="features__image-wrapper glass-panel">
-              <img src={clubImg} alt="Join Aljameela Club" loading="lazy" />
+              <img src={clubImg} alt="Our Approach to Silk & Shine Care" loading="lazy" />
               <div className="features__image-glow"></div>
             </div>
           </div>
