@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import woman    from '../assets/imgs/woman.webp';
 import woman1   from '../assets/imgs/woman-1.webp';
 import woman3   from '../assets/imgs/woman-3.webp';
@@ -59,12 +59,27 @@ const testimonials = [
   },
 ];
 
-const VISIBLE = 3;
+function useIsMobile(breakpoint = 640) {
+  const [mobile, setMobile] = useState(window.innerWidth <= breakpoint);
+  useEffect(() => {
+    const onResize = () => setMobile(window.innerWidth <= breakpoint);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, [breakpoint]);
+  return mobile;
+}
 
 export default function Testimonials() {
-  const [index, setIndex] = useState(0);
+  const isMobile = useIsMobile();
+  const VISIBLE = isMobile ? 1 : 3;
+  const CARD_WIDTH = isMobile ? 280 : 380;
+  const GAP = 20;
 
-  const max = testimonials.length - VISIBLE;
+  const [index, setIndex] = useState(0);
+  const max = Math.max(0, testimonials.length - VISIBLE);
+
+  // Reset index when switching between mobile/desktop
+  useEffect(() => { setIndex(0); }, [isMobile]);
 
   const prev = useCallback(() => setIndex((i) => Math.max(0, i - 1)), []);
   const next = useCallback(() => setIndex((i) => Math.min(max, i + 1)), [max]);
@@ -86,7 +101,7 @@ export default function Testimonials() {
         <div className="testimonials__track-wrap">
           <div
             className="testimonials__track"
-            style={{ transform: `translateX(calc(-${index * (380 + 20)}px))` }}
+            style={{ transform: `translateX(-${index * (CARD_WIDTH + GAP)}px)` }}
           >
             {testimonials.map((t) => (
               <div className="testimonial-card" key={t.name}>

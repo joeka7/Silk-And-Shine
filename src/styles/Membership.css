@@ -114,6 +114,7 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+  border: 1px solid #eeeeee14;
 }
 
 .pricing-card:hover {

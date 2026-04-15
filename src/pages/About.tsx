@@ -66,39 +66,66 @@ export default function About() {
         </div>
       </section>
 
-      {/* Story Text */}
+      {/* Story — two-column split */}
       <section className="about-story section">
-        <div className="container about-story__container glass-panel">
-          {/* Top — Text */}
-          <div className="about-story__text">
-            <div className="section-label">The Club</div>
-            <h2 className="section-title">A Transformative Journey<br />in Hair Care</h2>
-            <div className="about-story__prose">
-              <p>
+        <div className="container">
+          <div className="about-story__split">
+            {/* Left — Text */}
+            <div className="about-story__content">
+              <div className="section-label">The Club</div>
+              <h2 className="section-title">A Transformative Journey<br />in Hair Care</h2>
+              <p className="about-story__subtitle">
                 The Silk &amp; Shine Club is an exclusive annual membership that offers a transformative
                 journey in hair care. Designed by the experts at Everlast Wellness,
                 this club is perfect for those who want the best for their hair health and vitality.
               </p>
-              <p>
-                Members gain unlimited access to cutting-edge treatments and protocols tailored
-                for both men and women. Each treatment is part of a strategic regimen designed
-                for maximum and lasting effectiveness.
-              </p>
-              <p>
-                Everlast Wellness is an aesthetic wellness clinic specialising in dermatological
-                and anti-aging treatments and procedures. Our mission is to enhance the health
-                and wellness of our local community, supporting the body, mind, and spirit.
-              </p>
+              <div className="about-story__points">
+                <div className="about-story__point">
+                  <div className="about-story__point-icon"><i className="fa-solid fa-infinity"></i></div>
+                  <div className="about-story__point-text">
+                    <h4 className="about-story__point-title">Unlimited Access</h4>
+                    <p className="about-story__point-desc">
+                      Members gain unlimited access to cutting-edge treatments and protocols tailored
+                      for both men and women — designed for maximum and lasting effectiveness.
+                    </p>
+                  </div>
+                </div>
+                <div className="about-story__point">
+                  <div className="about-story__point-icon"><i className="fa-solid fa-flask"></i></div>
+                  <div className="about-story__point-text">
+                    <h4 className="about-story__point-title">Clinical Excellence</h4>
+                    <p className="about-story__point-desc">
+                      Everlast Wellness specialises in dermatological and anti-aging treatments.
+                      Our mission is to enhance the health and wellness of our community.
+                    </p>
+                  </div>
+                </div>
+                <div className="about-story__point">
+                  <div className="about-story__point-icon"><i className="fa-solid fa-spa"></i></div>
+                  <div className="about-story__point-text">
+                    <h4 className="about-story__point-title">Premium Care</h4>
+                    <p className="about-story__point-desc">
+                      Each treatment is part of a strategic regimen supporting the body,
+                      mind, and spirit — personalised to your unique needs.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="about-story__actions">
+                <Link to="/contact" className="btn-primary">Join the Club</Link>
+                <Link to="/for-women" className="btn-outline">For Women</Link>
+                <Link to="/for-men" className="btn-outline">For Men</Link>
+              </div>
+              <p className="about-story__brand">Silk &amp; Shine Club</p>
             </div>
-            <div className="about-story__actions">
-              <Link to="/contact" className="btn-primary">Join the Club</Link>
-              <Link to="/for-women" className="btn-outline">For Women</Link>
-              <Link to="/for-men" className="btn-outline">For Men</Link>
+
+            {/* Right — Image */}
+            <div className="about-story__visual">
+              <div className="about-story__image-wrapper glass-panel">
+                <img src={clubImg} alt="Silk & Shine Club Hair Care" loading="lazy" />
+                <div className="about-story__image-glow"></div>
+              </div>
             </div>
-          </div>
-          {/* Bottom — Image */}
-          <div className="about-story__image-wrap">
-            <img src={clubImg} alt="Silk & Shine Club" className="about-story__image" loading="lazy" />
           </div>
         </div>
       </section>

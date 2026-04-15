@@ -84,7 +84,7 @@ export default function Contact() {
     setStatus('loading');
 
     try {
-      const res = await fetch('http://localhost:4000/api/contact', {
+      const res = await fetch('http://localhost:5000/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -102,9 +102,7 @@ export default function Contact() {
         setStatus('error');
       }
     } catch {
-      // Backend not running – show success for demo purposes
-      setStatus('success');
-      setForm({ name: '', countryCode: '+971', phone: '', email: '', message: '' });
+      setStatus('error');
     }
   };
 

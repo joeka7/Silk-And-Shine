@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import pricingImg from '../assets/imgs/woman-6.webp';
 import '../styles/pages.css';
 
 const membershipDetails = [
@@ -132,23 +133,30 @@ export default function ForWomen() {
       {/* Pricing */}
       <section className="pricing-section">
         <div className="container">
-          <div className="pricing-section__inner">
-            <div className="section-label" style={{ justifyContent: 'center' }}>Pricing</div>
-            <h2 className="section-title" style={{ textAlign: 'center' }}>Membership For Women</h2>
-            <p className="section-subtitle" style={{ textAlign: 'center', margin: '0 auto' }}>
-              Join the Silk &amp; Shine Club to unlock the future of hair care, where science,
-              technology, and premium treatments come together to deliver unparalleled results.
-            </p>
-            <div className="pricing-section__card">
-              <div className="pricing-section__price">
-                <span className="pricing-section__currency">AED</span>
-                <span className="pricing-section__amount">3,800</span>
-                <span className="pricing-section__period">/ year</span>
+          <div className="pricing-section__split">
+            <div className="pricing-section__content">
+              <div className="section-label">Pricing</div>
+              <h2 className="section-title">Membership For Women</h2>
+              <p className="section-subtitle">
+                Join the Silk &amp; Shine Club to unlock the future of hair care, where science,
+                technology, and premium treatments come together to deliver unparalleled results.
+              </p>
+              <div className="pricing-section__card">
+                <div className="pricing-section__price">
+                  <span className="pricing-section__currency">AED</span>
+                  <span className="pricing-section__amount">3,800</span>
+                  <span className="pricing-section__period">/ year</span>
+                </div>
+                <p className="pricing-section__gift"><i className="fa-solid fa-gift"></i> + Special Gift included on membership</p>
+                <Link to="/contact" className="btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
+                  Get Your Membership Today →
+                </Link>
               </div>
-              <p className="pricing-section__gift"><i className="fa-solid fa-gift"></i> + Special Gift included on membership</p>
-              <Link to="/contact" className="btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
-                Get Your Membership Today →
-              </Link>
+            </div>
+            <div className="pricing-section__visual">
+              <div className="pricing-section__image-wrapper glass-panel">
+                <img src={pricingImg} alt="Silk & Shine Club for Women" loading="lazy" />
+              </div>
             </div>
           </div>
         </div>

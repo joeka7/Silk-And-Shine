@@ -200,8 +200,26 @@
 
 @media (max-width: 640px) {
   .testimonial-card {
-    min-width: 300px;
-    max-width: 300px;
+    min-width: 280px;
+    max-width: 280px;
     padding: 28px;
+  }
+
+  .testimonials__track-wrap {
+    margin: 0;
+    padding: 0;
+  }
+
+  .testimonials__track-wrap::before,
+  .testimonials__track-wrap::after {
+    width: 40px;
+  }
+
+  .testimonials__header {
+    margin-bottom: 40px;
+  }
+
+  .testimonials__controls {
+    margin-top: 32px;
   }
 }

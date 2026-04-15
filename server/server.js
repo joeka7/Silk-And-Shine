@@ -7,7 +7,7 @@ const cors       = require('cors');
 const nodemailer = require('nodemailer');
 
 const app  = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 
 // ─── Middleware ───────────────────────────────────────────────────────────────
 app.use(express.json());
@@ -22,13 +22,18 @@ app.use(cors({
 
 // ─── Nodemailer transporter ───────────────────────────────────────────────────
 const transporter = nodemailer.createTransport({
-  host:   process.env.SMTP_HOST   || 'smtp.gmail.com',
-  port:   Number(process.env.SMTP_PORT) || 587,
-  secure: process.env.SMTP_SECURE === 'true',
+  host:   process.env.EMAIL_HOST,
+  port:   Number(process.env.EMAIL_PORT) || 587,
+  secure: false,
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
+});
+
+transporter.verify((err) => {
+  if (err) console.error('SMTP connection error:', err.message);
+  else console.log('  ✓  SMTP connected and ready');
 });
 
 // ─── Validate contact payload ─────────────────────────────────────────────────
@@ -50,10 +55,10 @@ app.post('/api/contact', async (req, res) => {
     return res.status(400).json({ success: false, errors });
   }
 
-  const recipient = process.env.RECIPIENT_EMAIL || 'customer.service@everlastwellness.com';
+  const recipient = process.env.EMAIL_TO || 'customer.service@everlastwellness.com';
 
   const mailOptions = {
-    from:    `"Silk & Shine Club" <${process.env.SMTP_USER}>`,
+    from:    `"Silk & Shine Club" <${process.env.EMAIL_USER}>`,
     to:      recipient,
     replyTo: email,
     subject: `New Contact Form Submission — ${name}`,
@@ -66,29 +71,54 @@ Message:
 ${message}
     `.trim(),
     html: `
-      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; background: #0f0f0f; color: #f0ece4; padding: 40px; border-radius: 12px;">
-        <h2 style="color: #c9a84c; margin-bottom: 4px;">Silk &amp; Shine Club</h2>
-        <p style="color: #888; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-top: 0;">New Contact Form Submission</p>
-        <hr style="border: none; border-top: 1px solid rgba(201,168,76,0.2); margin: 24px 0;" />
-        <table style="width: 100%; border-collapse: collapse;">
-          <tr>
-            <td style="padding: 10px 0; color: #888; font-size: 13px; width: 100px;">Name</td>
-            <td style="padding: 10px 0; color: #f0ece4; font-size: 14px;">${escapeHtml(name)}</td>
-          </tr>
-          <tr>
-            <td style="padding: 10px 0; color: #888; font-size: 13px;">Phone</td>
-            <td style="padding: 10px 0; color: #f0ece4; font-size: 14px;">${escapeHtml(phone)}</td>
-          </tr>
-          <tr>
-            <td style="padding: 10px 0; color: #888; font-size: 13px;">Email</td>
-            <td style="padding: 10px 0; color: #c9a84c; font-size: 14px;"><a href="mailto:${escapeHtml(email)}" style="color: #c9a84c;">${escapeHtml(email)}</a></td>
-          </tr>
-        </table>
-        <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.05); margin: 24px 0;" />
-        <p style="color: #888; font-size: 13px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Message</p>
-        <p style="color: #d0c8b8; line-height: 1.7; font-size: 14px; white-space: pre-wrap;">${escapeHtml(message)}</p>
-        <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.05); margin: 32px 0 16px;" />
-        <p style="color: #555; font-size: 12px; text-align: center;">© Silk &amp; Shine Club · Everlast Wellness Medical Center · Abu Dhabi, UAE</p>
+      <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0a0a0c; border-radius: 16px; overflow: hidden; border: 1px solid rgba(44,158,138,0.2);">
+        <!-- Header with gradient line -->
+        <div style="background: linear-gradient(90deg, transparent, #2C9E8A, transparent); height: 2px;"></div>
+        <div style="padding: 40px 40px 32px; text-align: center;">
+          <img src="https://silkandshineclub.com/logo-white.png" alt="Silk & Shine Club" style="height: 80px; width: auto;" />
+          <div style="margin-top: 16px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #2C9E8A;">New Contact Form Submission</div>
+        </div>
+
+        <!-- Divider -->
+        <div style="margin: 0 40px; height: 1px; background: linear-gradient(90deg, transparent, rgba(44,158,138,0.25), transparent);"></div>
+
+        <!-- Contact details -->
+        <div style="padding: 32px 40px;">
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
+                <div style="font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: #6b6b75; margin-bottom: 4px;">Name</div>
+                <div style="font-size: 15px; color: #fcfcfc; font-weight: 500;">${escapeHtml(name)}</div>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
+                <div style="font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: #6b6b75; margin-bottom: 4px;">Phone</div>
+                <div style="font-size: 15px; color: #fcfcfc;">${escapeHtml(phone)}</div>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
+                <div style="font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: #6b6b75; margin-bottom: 4px;">Email</div>
+                <div style="font-size: 15px;"><a href="mailto:${escapeHtml(email)}" style="color: #2C9E8A; text-decoration: none;">${escapeHtml(email)}</a></div>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Message -->
+        <div style="margin: 0 40px; padding: 24px; background: #121216; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+          <div style="font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: #6b6b75; margin-bottom: 12px;">Message</div>
+          <div style="font-size: 14px; color: #a0a0ab; line-height: 1.8; white-space: pre-wrap;">${escapeHtml(message)}</div>
+        </div>
+
+        <!-- Footer -->
+        <div style="padding: 32px 40px; text-align: center;">
+          <div style="margin-bottom: 16px; height: 1px; background: linear-gradient(90deg, transparent, rgba(44,158,138,0.15), transparent);"></div>
+          <div style="font-size: 11px; color: #3a3a42; letter-spacing: 0.5px;">
+            &copy; ${new Date().getFullYear()} Silk &amp; Shine Club &middot; Everlast Wellness Medical Center &middot; Abu Dhabi, UAE
+          </div>
+        </div>
       </div>
     `,
   };
