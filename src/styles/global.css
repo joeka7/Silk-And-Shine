@@ -196,12 +196,6 @@ h6 {
   transition: var(--transition);
 }
 
-@media (max-width: 767px) {
-  .btn-primary::after {
-    
-  }
-}
-
 .btn-primary:hover::after {
   opacity: 1;
 }
