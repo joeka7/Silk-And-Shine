@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import clubCardImg from '../assets/imgs/aljameela-club-card.webp';
 import '../styles/Membership.css';
 
@@ -9,27 +8,6 @@ const benefits = [
   { icon: 'fa-solid fa-flask', title: 'Hormonal Balance', desc: 'Targeted therapies including hormone-supportive scalp serums.' },
   { icon: 'fa-solid fa-chart-bar', title: 'Progress Tracking', desc: 'Regular consultations track your progress and keep treatment aligned.' },
   { icon: 'fa-solid fa-calendar-days', title: 'Priority Scheduling', desc: 'Streamlined access to appointments with reduced wait times.' },
-];
-
-const plans = [
-  {
-    type: 'Women',
-    title: 'Membership for Women',
-    amount: '3,800',
-    currency: 'AED',
-    link: '/for-women',
-    featured: false,
-    features: ['Unlimited visits & treatments', 'Advanced laser & PRP therapies', 'Hormonal balance support', 'Special Gift included'],
-  },
-  {
-    type: 'Men',
-    title: 'Membership for Men',
-    amount: '3,500',
-    currency: 'AED',
-    link: '/for-men',
-    featured: true,
-    features: ['Unlimited visits & treatments', 'Advanced laser & PRP therapies', 'Thinning & hairline treatments', 'Special Gift included'],
-  },
 ];
 
 export default function Membership() {
@@ -61,32 +39,6 @@ export default function Membership() {
           ))}
         </div>
 
-        <div className="membership__cards">
-          {plans.map((p) => (
-            <div className={`pricing-card glass-panel ${p.featured ? ' pricing-card--featured' : ''}`} key={p.type}>
-              {p.featured && <div className="pricing-card__badge">Most Popular</div>}
-              <div className="pricing-card__header">
-                <div className="pricing-card__title">{p.title}</div>
-              </div>
-              <div className="pricing-card__price-wrap">
-                <span className="pricing-card__currency">{p.currency}</span>
-                <span className="pricing-card__amount">{p.amount}</span>
-                <span className="pricing-card__period">/ year</span>
-              </div>
-              <div className="pricing-card__features">
-                {p.features.map((f) => (
-                  <div className="pricing-card__feature" key={f}>
-                    <span className="pricing-card__feature-check"><i className="fa-solid fa-check"></i></span>
-                    {f}
-                  </div>
-                ))}
-              </div>
-              <Link to={p.link} className={p.featured ? 'btn-primary' : 'btn-outline'} style={{ width: '100%', marginTop: 'auto' }}>
-                Get Started →
-              </Link>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );

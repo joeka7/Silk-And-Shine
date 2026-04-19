@@ -36,7 +36,7 @@
   --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
 
   --max-width: 1500px;
-  --section-padding: 100px 0;
+  --section-padding: 80px 0;
 }
 
 /* ===== RESET & BASE ===== */
@@ -308,7 +308,7 @@ h6 {
 /* ===== RESPONSIVE BASE ===== */
 @media (max-width: 768px) {
   :root {
-    --section-padding: 70px 0;
+    --section-padding: 50px 0;
   }
 
   .container {

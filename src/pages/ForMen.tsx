@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import pricingImg from '../assets/imgs/man-3.webp';
+import pricingImg from '../assets/imgs/man-5.webp';
 import '../styles/pages.css';
 
 const membershipDetails = [
@@ -142,15 +142,16 @@ export default function ForMen() {
                 technology, and premium treatments come together to deliver unparalleled results.
               </p>
               <div className="pricing-section__card">
-                <div className="pricing-section__price">
-                  <span className="pricing-section__currency">AED</span>
-                  <span className="pricing-section__amount">3,500</span>
-                  <span className="pricing-section__period">/ year</span>
-                </div>
                 <p className="pricing-section__gift"><i className="fa-solid fa-gift"></i> + Special Gift included on membership</p>
-                <Link to="/contact" className="btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
-                  Get Your Membership Today →
-                </Link>
+                <a
+                  href="https://everlastwellness.store/product-category/hair-care/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary"
+                  style={{ width: '100%', justifyContent: 'center' }}
+                >
+                  Shop Hair Care Products →
+                </a>
               </div>
             </div>
             <div className="pricing-section__visual">
