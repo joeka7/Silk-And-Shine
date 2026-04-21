@@ -842,7 +842,7 @@
   right: 12px;
   top: 50%;
   width: 10px;
-  height: 10px;
+  height: 0px;
   pointer-events: none;
 }
 
@@ -850,7 +850,7 @@
 .country-select__arrow::after {
   content: '';
   position: absolute;
-  top: 50%;
+  top: 45%;
   width: 6px;
   height: 1.5px;
   background: var(--text-secondary);
@@ -1106,6 +1106,6 @@
     grid-template-columns: 1fr;
   }
   .phone-field {
-    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
   }
 }

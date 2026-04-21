@@ -143,9 +143,9 @@ app.listen(PORT, () => {
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function escapeHtml(str) {
   return String(str)
-    .replace(/&/g,  '&amp;')
-    .replace(/</g,  '&lt;')
-    .replace(/>/g,  '&gt;')
-    .replace(/"/g,  '&quot;')
-    .replace(/'/g,  '&#x27;');
+    .replaceAll('&',  '&amp;')
+    .replaceAll('<',  '&lt;')
+    .replaceAll('>',  '&gt;')
+    .replaceAll('"',  '&quot;')
+    .replaceAll("'",  '&#x27;');
 }

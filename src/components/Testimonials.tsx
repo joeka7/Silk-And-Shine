@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import woman    from '../assets/imgs/woman.webp';
 import woman1   from '../assets/imgs/woman-1.webp';
 import woman3   from '../assets/imgs/woman-3.webp';
@@ -71,18 +71,33 @@ function useIsMobile(breakpoint = 640) {
 
 export default function Testimonials() {
   const isMobile = useIsMobile();
-  const VISIBLE = isMobile ? 1 : 3;
   const CARD_WIDTH = isMobile ? 280 : 380;
   const GAP = 20;
 
-  const [index, setIndex] = useState(0);
-  const max = Math.max(0, testimonials.length - VISIBLE);
+  const total = testimonials.length;
+  const [realIndex, setRealIndex] = useState(0);
+  const [index, setIndex] = useState(total); // start at first real card
+  const [transitioning, setTransitioning] = useState(true);
+  const trackRef = useRef<HTMLDivElement>(null);
 
-  // Reset index when switching between mobile/desktop
-  useEffect(() => { setIndex(0); }, [isMobile]);
+  useEffect(() => { setRealIndex(0); setIndex(total); }, [isMobile]);
 
-  const prev = useCallback(() => setIndex((i) => Math.max(0, i - 1)), []);
-  const next = useCallback(() => setIndex((i) => Math.min(max, i + 1)), [max]);
+  const prev = useCallback(() => {
+    setTransitioning(true);
+    setIndex((i) => i - 1);
+  }, []);
+  const next = useCallback(() => {
+    setTransitioning(true);
+    setIndex((i) => i + 1);
+  }, []);
+
+  const handleTransitionEnd = useCallback(() => {
+    let newReal = ((index - total) % total + total) % total;
+    if (newReal !== realIndex) setRealIndex(newReal);
+    // Snap to real position without transition
+    setTransitioning(false);
+    setIndex(newReal + total);
+  }, [index, total, realIndex]);
 
   return (
     <section className="testimonials section">
@@ -100,16 +115,23 @@ export default function Testimonials() {
       <div className="container">
         <div className="testimonials__track-wrap">
           <div
+            ref={trackRef}
             className="testimonials__track"
-            style={{ transform: `translateX(-${index * (CARD_WIDTH + GAP)}px)` }}
+            style={{
+              transform: `translateX(-${index * (CARD_WIDTH + GAP)}px)`,
+              transition: transitioning ? 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
+            }}
+            onTransitionEnd={handleTransitionEnd}
           >
-            {testimonials.map((t) => (
-              <div className="testimonial-card" key={t.name}>
+            {[...testimonials, ...testimonials, ...testimonials].map((t, i) => (
+              <div className="testimonial-card" key={`${i}-${t.name}`}>
                 <div className="testimonial-card__quote-mark">"</div>
                 <div className="testimonial-card__stars">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <span key={i} className="testimonial-card__star">★</span>
-                  ))}
+                  <span className="testimonial-card__star">★</span>
+                  <span className="testimonial-card__star">★</span>
+                  <span className="testimonial-card__star">★</span>
+                  <span className="testimonial-card__star">★</span>
+                  <span className="testimonial-card__star">★</span>
                 </div>
                 <p className="testimonial-card__text">{t.text}</p>
                 <div className="testimonial-card__footer">
@@ -127,18 +149,18 @@ export default function Testimonials() {
         </div>
 
         <div className="testimonials__controls">
-          <button className="testimonials__btn" onClick={prev} disabled={index === 0} aria-label="Previous">‹</button>
+          <button className="testimonials__btn" onClick={prev} aria-label="Previous">‹</button>
           <div className="testimonials__dots">
-            {Array.from({ length: max + 1 }).map((_, i) => (
+            {testimonials.map((_, slideNum) => (
               <button
-                key={i}
-                className={`testimonials__dot${i === index ? ' testimonials__dot--active' : ''}`}
-                onClick={() => setIndex(i)}
-                aria-label={`Slide ${i + 1}`}
+                key={`slide-${slideNum}`}
+                className={`testimonials__dot${slideNum === realIndex ? ' testimonials__dot--active' : ''}`}
+                onClick={() => { setTransitioning(true); setIndex(slideNum + total); }}
+                aria-label={`Slide ${slideNum + 1}`}
               />
             ))}
           </div>
-          <button className="testimonials__btn" onClick={next} disabled={index === max} aria-label="Next">›</button>
+          <button className="testimonials__btn" onClick={next} aria-label="Next">›</button>
         </div>
       </div>
     </section>

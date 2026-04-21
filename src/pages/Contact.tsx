@@ -348,7 +348,7 @@ function validate(data: FormData): FormErrors {
   const errors: FormErrors = {};
   if (!data.name.trim()) errors.name = 'Name is required.';
   if (!data.phone.trim()) errors.phone = 'Phone number is required.';
-  else if (!/^\d{6,15}$/.test(data.phone.replace(/\s/g, ''))) errors.phone = 'Enter a valid phone number.';
+  else if (!/^\d{6,15}$/.test(data.phone.replaceAll(/\s/g, ''))) errors.phone = 'Enter a valid phone number.';
   if (!data.email.trim()) errors.email = 'Email address is required.';
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) errors.email = 'Enter a valid email address.';
   if (!data.message.trim()) errors.message = 'Message is required.';
