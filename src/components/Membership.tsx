@@ -1,4 +1,3 @@
-import clubCardImg from '../assets/imgs/aljameela-club-card.webp';
 import '../styles/Membership.css';
 
 const benefits = [
@@ -21,9 +20,6 @@ export default function Membership() {
             <p className="section-subtitle">
               Experience luxury, perks, and high-quality care. Find the membership that unlocks your hair\'s potential.
             </p>
-          </div>
-          <div className="membership__card-visual glass-panel">
-             <img src={clubCardImg} alt="Aljameela Club Card VIP" className="vip-card-img" loading="lazy" />
           </div>
         </div>
 
