@@ -46,9 +46,37 @@ function validateContact({ name, phone, email, message }) {
   return errors;
 }
 
+// ─── Turnstile verification ───────────────────────────────────────────────────
+async function verifyTurnstile(token, ip) {
+  try {
+    const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        secret: process.env.TURNSTILE_SECRET_KEY,
+        response: token,
+        remoteip: ip,
+      }),
+    });
+    const data = await res.json();
+    return data.success === true;
+  } catch {
+    return false;
+  }
+}
+
 // ─── POST /api/contact ────────────────────────────────────────────────────────
 app.post('/api/contact', async (req, res) => {
-  const { name, phone, email, message } = req.body;
+  const { name, phone, email, message, turnstileToken } = req.body;
+
+  if (!turnstileToken) {
+    return res.status(400).json({ success: false, errors: ['Security check is required.'] });
+  }
+
+  const turnstileOk = await verifyTurnstile(turnstileToken, req.ip);
+  if (!turnstileOk) {
+    return res.status(400).json({ success: false, errors: ['Security check failed. Please try again.'] });
+  }
 
   const errors = validateContact({ name, phone, email, message });
   if (errors.length > 0) {

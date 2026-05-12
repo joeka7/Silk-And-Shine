@@ -944,6 +944,13 @@
   border-radius: 3px;
 }
 
+/* Turnstile widget */
+.form-turnstile {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 /* Submit button */
 .form-submit {
   width: 100%;

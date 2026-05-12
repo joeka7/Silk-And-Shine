@@ -2,6 +2,16 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/pages.css';
 
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (el: HTMLElement, opts: object) => string;
+      reset: (id: string) => void;
+      remove: (id: string) => void;
+    };
+  }
+}
+
 interface FormData {
   name: string;
   countryIso: string;
@@ -391,6 +401,40 @@ export default function Contact() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [captchaError, setCaptchaError] = useState(false);
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    const tryRender = () => {
+      if (!window.turnstile || !turnstileRef.current || widgetIdRef.current) return;
+      widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+        sitekey: '0x4AAAAAAASx--In2l1QKgmD',
+        theme: 'dark',
+        callback: (token: string) => { setTurnstileToken(token); setCaptchaError(false); },
+        'expired-callback': () => setTurnstileToken(''),
+        'error-callback': () => setTurnstileToken(''),
+      });
+    };
+
+    if (window.turnstile) {
+      tryRender();
+    } else {
+      const id = setInterval(() => {
+        if (window.turnstile) { clearInterval(id); tryRender(); }
+      }, 100);
+      return () => clearInterval(id);
+    }
+
+    return () => {
+      if (window.turnstile && widgetIdRef.current) {
+        window.turnstile.remove(widgetIdRef.current);
+        widgetIdRef.current = null;
+      }
+    };
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -406,6 +450,10 @@ export default function Contact() {
       setErrors(errs);
       return;
     }
+    if (!turnstileToken) {
+      setCaptchaError(true);
+      return;
+    }
     setStatus('loading');
 
     try {
@@ -417,12 +465,17 @@ export default function Contact() {
           phone: `${countryCodes.find((c) => c.iso === form.countryIso)?.code ?? ''} ${form.phone}`,
           email: form.email,
           message: form.message,
+          turnstileToken,
         }),
       });
 
       if (res.ok) {
         setStatus('success');
         setForm({ name: '', countryIso: 'AE', phone: '', email: '', message: '' });
+        setTurnstileToken('');
+        if (window.turnstile && widgetIdRef.current) {
+          window.turnstile.reset(widgetIdRef.current);
+        }
       } else {
         setStatus('error');
       }
@@ -580,6 +633,14 @@ export default function Contact() {
                     onChange={handleChange}
                   />
                   {errors.message && <span className="form-error">{errors.message}</span>}
+                </div>
+
+                {/* Turnstile */}
+                <div className="form-turnstile">
+                  <div ref={turnstileRef} />
+                  {captchaError && (
+                    <span className="form-error">Please complete the security check.</span>
+                  )}
                 </div>
 
                 {/* Status messages */}
