@@ -5,6 +5,7 @@ require('dotenv').config();
 const express    = require('express');
 const cors       = require('cors');
 const nodemailer = require('nodemailer');
+const path       = require('path');
 
 const app  = express();
 const PORT = process.env.PORT || 5000;
@@ -162,6 +163,11 @@ ${message}
 
 // ─── Health check ─────────────────────────────────────────────────────────────
 app.get('/health', (_req, res) => res.json({ status: 'ok' }));
+
+// ─── Serve Vite build (production) ───────────────────────────────────────────
+const distPath = path.join(__dirname, '..', 'dist');
+app.use(express.static(distPath));
+app.get('*', (_req, res) => res.sendFile(path.join(distPath, 'index.html')));
 
 // ─── Start ────────────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
