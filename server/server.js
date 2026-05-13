@@ -104,7 +104,7 @@ ${message}
         <!-- Header with gradient line -->
         <div style="background: linear-gradient(90deg, transparent, #2C9E8A, transparent); height: 2px;"></div>
         <div style="padding: 40px 40px 32px; text-align: center;">
-          <img src="https://silkandshineclub.com/logo-white.png" alt="Silk & Shine Club" style="height: 80px; width: auto;" />
+          <img src="https://silkandshineclub.com/logo-white.webp" alt="Silk & Shine Club" style="height: 80px; width: auto;" />
           <div style="margin-top: 16px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #2C9E8A;">New Contact Form Submission</div>
         </div>
 
