@@ -5,7 +5,6 @@ Official website for the Silk & Shine Club — an exclusive annual hair care mem
 | | |
 | --- | --- |
 | **Production** | https://silkandshineclub.com/ |
-| **Repository** | https://github.com/youssefkaramev/silk-and-shine-club |
 | **Frontend** | React 19 · TypeScript · Vite |
 | **Backend** | Node.js · Express 4 |
 | **Deployment** | Single Node process — Express serves the Vite build and the API (no platform config committed) |
